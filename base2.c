@@ -19,5 +19,5 @@ base_fini(void)
 void
 base_print(const char* s)
 {
-  printf("  base version 2> %s\n", s);
+  printf("  base version 2; called from: %s\n", s);
 }
