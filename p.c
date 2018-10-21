@@ -16,7 +16,7 @@ d1> init
 d2> init
 d1()
  d2_print()
-  base version 2; called from: d1
+  base version 1; called from: d1
 d2()
  d1_print()
   base version 1; called from: d2

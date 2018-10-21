@@ -16,7 +16,6 @@ $(BUILD)/%.o: %.c
 # Base library version 1
 $(BUILD)/libbase.so.1.0: $(BUILD)/base1.o
 	$(LD) -shared \
-		-Wl,--default-symver \
 		-Wl,-soname,libbase.so.1 \
 		-o $@ $<
 	ln -rfs $(BUILD)/libbase.so.1.0 $(BUILD)/libbase.so.1  # library to link with
@@ -24,7 +23,6 @@ $(BUILD)/libbase.so.1.0: $(BUILD)/base1.o
 # Base library version 2
 $(BUILD)/libbase.so.2.0: $(BUILD)/base2.o
 	$(LD) -shared \
-		-Wl,--default-symver \
 		-Wl,-soname,libbase.so.2 \
 		-o $@ $<
 	ln -rfs $(BUILD)/libbase.so.2.0 $(BUILD)/libbase.so.2  # library to link with
@@ -36,7 +34,6 @@ $(BUILD)/libd1.so: $(BUILD)/d1.o $(BUILD)/libbase.so.1.0
 	ldconfig -N -f ld.so.conf
 	ln -rfs $(BUILD)/libbase.so.1 $(BUILD)/libbase.so  # library to link with
 	$(LD) $(LDFLAGS) -L./$(BUILD) \
-		-Wl,--default-symver \
 		-Wl,-soname,libd1.so \
 		-shared -o $@ $< -lbase
 	rm $(BUILD)/libbase.so
@@ -48,7 +45,6 @@ $(BUILD)/libd2.so: $(BUILD)/d2.o $(BUILD)/libbase.so.2.0 $(BUILD)/libd1.so
 	ldconfig -N -f ld.so.conf
 	ln -rfs $(BUILD)/libbase.so.2 $(BUILD)/libbase.so  # library to link with
 	$(LD) $(LDFLAGS) -L./$(BUILD) \
-		-Wl,--default-symver \
 		-Wl,-soname,libd2.so \
 		-shared -o $@ $< -lbase -ld1
 	rm $(BUILD)/libbase.so
