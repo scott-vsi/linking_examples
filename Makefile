@@ -1,3 +1,5 @@
+# i have no idea how Makefiles work
+
 BUILD=build
 CFLAGS=-fPIC -Wall -pedantic
 LD=gcc
