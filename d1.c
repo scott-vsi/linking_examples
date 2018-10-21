@@ -19,15 +19,14 @@ d1_fini(void)
   printf("d1> fini\n");
 }
 
-void
-d1_print(const char* s)
+
+void d1_print(const char* s)
 {
   printf(" d1_print()\n");
   base_print(s);
 }
 
-void
-d1()
+void d1()
 {
   printf("d1()\n");
   d2_print("d1");
