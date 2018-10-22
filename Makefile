@@ -46,7 +46,7 @@ $(BUILD)/libd2.so: $(BUILD)/d2.o $(BUILD)/libbase.so.2.0 $(BUILD)/libd1.so
 	ln -rfs $(BUILD)/libbase.so.2 $(BUILD)/libbase.so  # library to link with
 	$(LD) $(LDFLAGS) -L./$(BUILD) \
 		-Wl,-soname,libd2.so \
-		-shared -o $@ $< -lbase -ld1
+		-shared -o $@ $< -lbase
 	rm $(BUILD)/libbase.so
 
 # p: Test program that depends on both libd1 and libd2.
