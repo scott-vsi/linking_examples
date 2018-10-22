@@ -39,8 +39,5 @@ d2> init
  d1_print()
   base version 1; called from: d1
  d2_print()
-  base version 1; called from: d2
-d2> fini
-d1> fini
-base version 1> fini
+Segmentation fault
 #endif

@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void base_print(const char*);
+void base_print(int, const char*);
 //void d1_print(const char*);
 
 static
@@ -23,7 +23,7 @@ d2_fini(void)
 void d2_print(const char* s)
 {
   printf(" d2_print()\n");
-  base_print(s);
+  base_print(3, s);
 }
 
 //void d2()

@@ -17,7 +17,7 @@ base_fini(void)
 }
 
 
-void base_print(const char* s)
+void base_print(int n, const char* s)
 {
-  printf("  base version 2; called from: %s\n", s);
+  printf("  base version 2; called from: %s with extra arg: %d\n", s, n);
 }
