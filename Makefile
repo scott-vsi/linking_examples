@@ -16,38 +16,38 @@ $(BUILD)/%.o: %.c
 # Base library version 1
 $(BUILD)/base1/libbase.so.1.0: $(BUILD)/base1.o
 	$(LD) -shared \
-		-Wl,-soname,libbase.so.1 \
+		-Wl,-soname,libbase.so \
 		-o $@ $<
 	ln -rfs $(BUILD)/base1/libbase.so.1.0 $(BUILD)/base1/libbase.so.1  # library to link with
+	ln -rfs $(BUILD)/base1/libbase.so.1 $(BUILD)/base1/libbase.so
 
 # Base library version 2
 $(BUILD)/base2/libbase.so.2.0: $(BUILD)/base2.o
 	$(LD) -shared \
-		-Wl,-soname,libbase.so.2 \
+		-Wl,-soname,libbase.so \
 		-o $@ $<
 	ln -rfs $(BUILD)/base2/libbase.so.2.0 $(BUILD)/base2/libbase.so.2  # library to link with
+	ln -rfs $(BUILD)/base2/libbase.so.2 $(BUILD)/base2/libbase.so
 
 # libd1.so:
 # * Uses libbase. Compiled against libbase.so.1
 # * provides versioned symbols
 $(BUILD)/libd1.so: $(BUILD)/d1.o $(BUILD)/base1/libbase.so.1.0
 	ldconfig -N -f ld.so.conf
-	ln -rfs $(BUILD)/base1/libbase.so.1 $(BUILD)/base1/libbase.so  # library to link with
 	$(LD) -Wl,-rpath=$(BUILD)/base1 -L./$(BUILD) -L./$(BUILD)/base1 \
 		-Wl,-soname,libd1.so \
 		-shared -o $@ $< -lbase
-	rm $(BUILD)/base1/libbase.so
+	#rm $(BUILD)/base1/libbase.so
 
 # libd2.so:
 # * Uses libbase. Compiled against libbase.so.2
 # * provides unversioned symbols
 $(BUILD)/libd2.so: $(BUILD)/d2.o $(BUILD)/base2/libbase.so.2.0 $(BUILD)/libd1.so
 	ldconfig -N -f ld.so.conf
-	ln -rfs $(BUILD)/base2/libbase.so.2 $(BUILD)/base2/libbase.so  # library to link with
 	$(LD) -Wl,-rpath=$(BUILD)/base2 -L./$(BUILD) -L./$(BUILD)/base2 \
 		-Wl,-soname,libd2.so \
 		-shared -o $@ $< -lbase
-	rm $(BUILD)/base2/libbase.so
+	#rm $(BUILD)/base2/libbase.so
 
 # p: Test program that depends on both libd1 and dynamically loads libd2.
 p: $(BUILD)/p.o
