@@ -49,9 +49,9 @@ $(BUILD)/libd2.so: $(BUILD)/d2.o $(BUILD)/base2/libbase.so.2.0 $(BUILD)/libd1.so
 		-shared -o $@ $< -lbase
 	#rm $(BUILD)/base2/libbase.so
 
-# p: Test program that depends on both libd1 and dynamically loads libd2.
+# p: Test program that depends dynamically on both libd1 and libd2.
 p: $(BUILD)/p.o
-	$(CC) $(LDFLAGS) -o $(BUILD)/p $(BUILD)/p.o -L$(BUILD) -Wl,-rpath=$(BUILD) -ld1 -ldl
+	$(CC) $(LDFLAGS) -o $(BUILD)/p $(BUILD)/p.o -L$(BUILD) -Wl,-rpath=$(BUILD) -ldl
 
 clean:
 	rm -f $(BUILD)/*.o $(BUILD)/*.so $(BUILD)/base[12]/*.so* $(BUILD)/*.[012] $(BUILD)/*~ $(BUILD)/p $(BUILD)/*.png
