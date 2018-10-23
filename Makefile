@@ -1,3 +1,4 @@
+# ELF linking examples
 # i have no idea how Makefiles work
 
 BUILD=build
