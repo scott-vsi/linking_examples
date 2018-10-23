@@ -23,8 +23,8 @@ int main()
       return -1;
   }
 
-  d1_print("d1"); // d1.so -> libbase.so [specifically libbase.so.1]
-  func_d2_print("d2"); // d2.so -> libbase.so [specifically libbase.so.2]
+  d1_print("d1"); // d1.so -> libbase.so.1
+  func_d2_print("d2"); // d2.so -> libbase.so.2
 
   dlclose(handle);
   return 0;
@@ -35,6 +35,7 @@ int main()
 base version 1> init
 d1> init
 dlopen called
+base version 2> init
 d2> init
  d1_print()
   base version 1; called from: d1
