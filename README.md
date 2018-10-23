@@ -1,21 +1,32 @@
-ELF link time dependencies are scanned in a breadth-first search according to their order on the link line
+Experiment with dynamic symbol resolution across dynamically linked and loaded ELF libraries
+
+TLDR;
+
+- Dynamically linked dependencies are scanned in a breadth-first search according to their order on the link line.
+- Dynamically loaded dependencies (`dlopen`) are, by default, added to a private link chain.
 
 
-1. `e58d5c6` works; [compatible definitions]<br/>
+Compiling and running
+---------------------
+```bash
+$ make && ./p # see p.c for expected output
+```
+
+1. `e58d5c6` works; [compatible definitions]
     ```
     p -> libd1 -> libbase.so.1 [duplicate]
       libd2.so -> libbase.so.2 [duplicate]
     ```
 
 1. `a774a61` works; [compatible definitions]<br/>
-    RE dynamic linker (ld.so) won't reload libbase.so.2 since it has already been loaded
+    RE dynamic linker (ld.so) won't reload libbase.so[.2] since it has already been loaded
     ```
     p -> libd1 -> libbase.so [duplicate] # linked against libbase.so.1
       libd2.so -> libbase.so [duplicate] # linked against libbase.so.2
     ```
 
-1. `8e1cfed` won't work; [diamond linking problem with *incompatible* definitions]<br/>
-    RE dynamic linker (ld.so) won't reload libbase.so.2 since it has already been loaded
+1. `8e1cfed` won't work; [diamond linking problem with **incompatible** definitions]<br/>
+    RE dynamic linker (ld.so) won't reload libbase.so[.2] since it has already been loaded
     ```
     p -> libd1 -> libbase.so [duplicate] # linked against libbase.so.1
       libd2.so -> libbase.so [duplicate] # linked against libbase.so.2
@@ -38,7 +49,7 @@ ELF link time dependencies are scanned in a breadth-first search according to th
     ```
 
 1. `70f3c8c` won't work - [a la python import]<br/>
-    RE similar to the diamond linking problem; the dynamic linker (ld.so) won't reload libbase.so[.2] as it has already been loaded (i think)
+    RE similar to the diamond linking problem; the dynamic linker (ld.so) won't reload libbase.so[.2] as it has already been loaded
     ```
     p
       libd1.so -> libbase.so [duplicate] # linked against libbase.so.1 (under the SONAME of
