@@ -1,7 +1,6 @@
 #include<stdio.h>
 
 void base_print(int, const char*);
-void base_v2_only(const char*);
 //void d1_print(const char*);
 
 static
@@ -25,7 +24,6 @@ void d2_print(const char* s)
 {
   printf(" d2_print()\n");
   base_print(3, s);
-  base_v2_only(s);
 }
 
 //void d2()

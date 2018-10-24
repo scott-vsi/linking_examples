@@ -21,8 +21,3 @@ void base_print(int n, const char* s)
 {
   printf("  base version 2; called from: %s with extra arg: %d\n", s, n);
 }
-
-void base_v2_only(const char* s)
-{
-  printf("  base function only in version 2; called from: %s\n", s);
-}
