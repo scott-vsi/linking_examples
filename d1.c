@@ -19,7 +19,7 @@ d1_fini(void)
   printf("d1> fini\n");
 }
 
-__attribute__ ((visibility ("hidden")))
+
 void d1_print(const char* s)
 {
   printf(" d1_print()\n");
