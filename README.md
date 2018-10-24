@@ -73,6 +73,13 @@ $ make && ./p # see p.c for expected output
       libbase.so.2 [duplicate]
     ```
 
+1. `89c6b64` won't work<br/>
+    ```
+    p
+      libd1.so -> libbase.so           # linked against libbase.so.1
+      libd2.so -> libbase.so [missing] # linked against libbase.so.2
+    ```
+
 ---
 [verilook case]
 shouldn't work; [diamond linking problem again]<br/>
