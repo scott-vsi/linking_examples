@@ -17,7 +17,7 @@ $(BUILD)/%.o: %.c
 # Base library version 1
 $(BUILD)/base1/libbase.so.1.0: $(BUILD)/base1.o
 	$(LD) -shared \
-		-Wl,-soname,libbase.so.1 \
+		-Wl,-soname,libbase.so \
 		-o $@ $<
 	ln -rfs $(BUILD)/base1/libbase.so.1.0 $(BUILD)/base1/libbase.so.1  # library to link with
 	ln -rfs $(BUILD)/base1/libbase.so.1 $(BUILD)/base1/libbase.so
@@ -25,7 +25,7 @@ $(BUILD)/base1/libbase.so.1.0: $(BUILD)/base1.o
 # Base library version 2
 $(BUILD)/base2/libbase.so.2.0: $(BUILD)/base2.o
 	$(LD) -shared \
-		-Wl,-soname,libbase.so.2 \
+		-Wl,-soname,libbase.so \
 		-o $@ $<
 	ln -rfs $(BUILD)/base2/libbase.so.2.0 $(BUILD)/base2/libbase.so.2  # library to link with
 	ln -rfs $(BUILD)/base2/libbase.so.2 $(BUILD)/base2/libbase.so

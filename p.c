@@ -37,8 +37,8 @@ int main()
       return -1;
   }
 
-  func_d1_print("d1"); // d1.so -> libbase.so.1
-  func_d2_print("d2"); // d2.so -> libbase.so.2
+  func_d1_print("d1"); // d1.so -> libbase.so [specifically, libbase.so.1]
+  func_d2_print("d2"); // d2.so -> libbase.so [specifically, libbase.so.2]
 
   dlclose(handle1);
   dlclose(handle2);
@@ -50,14 +50,7 @@ int main()
 dlopen called
 base version 1> init
 d1> init
-base version 2> init
-d2> init
- d1_print()
-  base version 1; called from: d1
- d2_print()
-  base version 2; called from: d2 with extra arg: 3
+Error: build/libd2.so: undefined symbol: base_v2_only
 d1> fini
 base version 1> fini
-d2> fini
-base version 2> fini
 #endif
