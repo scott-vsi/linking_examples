@@ -66,6 +66,13 @@ $ make && ./p # see p.c for expected output
       libd2.so -> libbase.so.2 [duplicate]
     ```
 
+1. `482352f` works - dynamically load incompatible libraries
+    ```
+    p
+      libbase.so.1 [duplicate]
+      libbase.so.2 [duplicate]
+    ```
+
 ---
 [verilook case]
 shouldn't work; [diamond linking problem again]<br/>
